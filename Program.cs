@@ -7,13 +7,19 @@ public class PopProject
 {
     public static void Main(string[] args)
     {
-        string msgFinal;
+        string[] options = { "A", "B", "C", "D" };
+        string msgFinal, option;
         int dia, mes, any;
         const string MsgCorrecte = "La data és correcta";
         const string MsgIncorrecte = "El format no és correcte";
         const string MsgInputDay = "Introdueix el dia: ";
         const string MsgInputMonth = "Introdueix el mes: ";
         const string MsgInputYear = "Introdueix el any: ";
+        const string MsgInputOption = "Introdueix una opció: \nA. Saltar \nB. Córrer \nC. Ajupir-se \nD. Amagar-se";
+        const string MsgJump = "Has saltat";
+        const string MsgRun = "Has corregut";
+        const string MsgDuck = "T'has ajupit";
+        const string MsgHide = "T'has amagat";
 
         Console.Write(MsgInputDay);
         dia = Convert.ToInt32(Console.ReadLine());
@@ -26,8 +32,32 @@ public class PopProject
         Console.WriteLine();
         msgFinal = valida(dia, mes, any) ? MsgCorrecte : MsgIncorrecte;
         Console.WriteLine(msgFinal);
+        Console.WriteLine();
+        do
+        {
+            Console.WriteLine(MsgInputOption);
+            option = Console.ReadLine().ToUpper();
+        } while (!ValidateMenuOption(option, options));
+        switch (option)
+        {
+            case "A":
+                Console.WriteLine(MsgJump);
+                break;
+            case "B":
+                Console.WriteLine(MsgRun);
+                break;
+            case "C":
+                Console.WriteLine(MsgDuck);
+                break;
+            case "D":
+                Console.WriteLine(MsgHide);
+                break;
+        }
     }
-
+    public static bool ValidateMenuOption(string option, string[] options)
+    {
+        return options.Contains(option);
+    }
     public static bool valida(int day, int month, int year)
     {
         int totalDaysMonth = 0;
